@@ -1,0 +1,11 @@
+# IDE
+.idea
+*.iml
+
+# Git
+.git
+
+# Dev
+venv
+__pycache__
+.env
