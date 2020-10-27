@@ -7,4 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "./fb-nc-dyndns.py" ]
+RUN python -m compileall
+
+USER nobody
+
+CMD [ "python", "./fb-nc-dyndns.py" ]
