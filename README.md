@@ -18,7 +18,7 @@ The following variables are required:
 
 * `FB_NC_DYNDNS_FB_USER="my-fritzbox-user"` - Your Fritzbox user
 * `FB_NC_DYNDNS_FB_PASSWORD="my-fritzbox-password"` - Your Fritzbox user's password
-* `FB_NC_DYNDNS_NC_CUSTNO="12345"` - Your Netcup customer number
+* `FB_NC_DYNDNS_NC_CUSTNO=12345` - Your Netcup customer number
 * `FB_NC_DYNDNS_NC_API_KEY="my-netcup-api-key"` - Your Netcup API key
 * `FB_NC_DYNDNS_NC_API_PW="my-netcup-api-password"` - Your Netcup API password
 * `FB_NC_DYNDNS_DOMAIN="yourdomain.abc"` - Your domain/zone
@@ -28,5 +28,6 @@ The following variables are optional (defaults as shown):
 
 * `FB_NC_DYNDNS_FB_ADDRESS="fritz.box"` - The address/hostname of your Fritzbox
 * `FB_NC_DYNDNS_FB_TLS="True"` - Whether to use TLS to access your Fritzbox
-* `FB_NC_DYNDNS_FB_TIMEOUT="10"` - Timeout for Fritzbox communicaiton
-* `FB_NC_DYNDNS_INTERVAL="300"` - Interval to query for IPv4/IPv6 updates (in seconds)
+* `FB_NC_DYNDNS_FB_TIMEOUT=10` - Timeout for Fritzbox communicaiton
+* `FB_NC_DYNDNS_INTERVAL=300` - Interval to query for IPv4/IPv6 updates (in seconds)
+* `FB_NC_DYNDNS_LOGLEVEL="INFO"` - Default log level for the logger

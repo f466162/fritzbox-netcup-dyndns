@@ -17,3 +17,4 @@ class Configuration:
         self.domain = env.str('FB_NC_DYNDNS_DOMAIN')
         self.host = env.str('FB_NC_DYNDNS_HOST')
         self.interval = env.int('FB_NC_DYNDNS_INTERVAL', 300)
+        self.loglevel = env.str('FB_NC_DYNDNS_LOGLEVEL', 'INFO')

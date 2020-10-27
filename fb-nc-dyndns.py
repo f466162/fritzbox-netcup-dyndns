@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 config = Configuration()
 
 def main(addresses: tuple):
-    logging.basicConfig(level=logging.INFO,
+    logging.basicConfig(level=config.loglevel,
                         format="%(asctime)s %(levelname)s %(processName)s/%(module)s[%(process)d]: %(message)s "
                                "[%(pathname)s:%(lineno)d]")
 

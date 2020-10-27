@@ -71,7 +71,8 @@ class Netcup:
 
     def handle_response(self, action: str, response: requests.Response):
         payload = json.loads(response.text)
-        message = "Netcup API: action={}, HTTP status={}, API status={}".format(action, response.reason, payload["status"])
+        message = "Netcup API: action={}, HTTP status={}, API status={}".format(action, response.reason,
+                                                                                payload["status"])
 
         if response.ok:
             self.logger.info(message)
