@@ -8,7 +8,7 @@ that can be accessed using `fritzconnection`.
 
 The client retrieves the DNS records of the specified domain and looks for an A or AAAA record 
 to update. If, i.e., the AAAA record is missing or no IPv6 address could be retrieved from your 
-Fritzbox, the update for this record type is skipped.
+Fritzbox, the update for this record type is skipped. Multiple A/AAAA records can be specified and must be separated by commas.
 
 ## Configuration
 
@@ -22,7 +22,7 @@ The following variables are required:
 * `FB_NC_DYNDNS_NC_API_KEY="my-netcup-api-key"` - Your Netcup API key
 * `FB_NC_DYNDNS_NC_API_PW="my-netcup-api-password"` - Your Netcup API password
 * `FB_NC_DYNDNS_DOMAIN="yourdomain.abc"` - Your domain/zone
-* `FB_NC_DYNDNS_HOST="your-a-or-aaaa-record"` - Your host in your domain/zone
+* `FB_NC_DYNDNS_HOST="your-a-or-aaaa-record,a-second-record"` - Your hostname in your domain/zone, multiple hostnames possible
 
 The following variables are optional (defaults as shown):
 
