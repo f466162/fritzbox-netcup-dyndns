@@ -4,6 +4,8 @@ import logging
 import signal
 import sys
 import time
+import math
+import random
 
 from fritzconnection.lib.fritzstatus import FritzStatus
 
@@ -75,5 +77,9 @@ signal.signal(signal.SIGINT, shutdown)
 last_addresses = 'init', 'init'
 
 while True:
+    # Store last addresses
     last_addresses = main(last_addresses)
-    time.sleep(config.interval)
+
+    # Sleep up to config.interval + 10% to relax hard timing
+    skew = random.randint(0, min(1, math.floor(config.interval * 0.1)))
+    time.sleep(config.interval + skew)
