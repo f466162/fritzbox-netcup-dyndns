@@ -81,5 +81,6 @@ while True:
     last_addresses = main(last_addresses)
 
     # Sleep up to config.interval + 10% to relax hard timing
-    skew = random.randint(0, min(1, math.floor(config.interval * 0.1)))
+    skew = random.randint(0, max(1, math.floor(config.interval * 0.1)))
+    logger.debug("Next check for updating DNS records in {} (skew = {})".format(config.interval + skew, skew))
     time.sleep(config.interval + skew)
