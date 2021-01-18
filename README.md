@@ -4,11 +4,16 @@
 
 A simple client to trigger periodic updates of your Netcup DNS settings so you can use your 
 Netcup-registered domain for dynamic DNS (aka DynDNS). The client assumes you own a Fritzbox 
-that can be accessed using `fritzconnection`.
+that can be accessed using `fritzconnection`. The client queries the current IP addresses from 
+the Fritzbox API and, if the addresses have changed, it calls the Netcup API to perform a DNS 
+update. Otherwise the Netcup API is not called. When started, Fritzbox is queried immediately
+and an update will be performed. Afterwards Fritzbox is queried every `FB_NC_DYNDNS_INTERVAL` 
+seconds.
 
 The client retrieves the DNS records of the specified domain and looks for an A or AAAA record 
-to update. If, i.e., the AAAA record is missing or no IPv6 address could be retrieved from your 
-Fritzbox, the update for this record type is skipped. Multiple A/AAAA records can be specified and must be separated by commas.
+to update. If, i.e., any A or AAAA record is missing or no IPv6 address could be retrieved from your 
+Fritzbox, the update for this record type is skipped. Multiple A/AAAA records can be specified 
+and must be separated by commas.
 
 ## Configuration
 
