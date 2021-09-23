@@ -62,7 +62,7 @@ def queue_update_for_record(dnsrecords, fritzbox, exposed_host_ipv6, a_record, u
                 logger.info("A update: {} -> {}".format(a_record, fritzbox.external_ip))
 
             if entry['type'] == 'AAAA':
-                entry['destination'] = fritzbox.external_ipv6
+                entry['destination'] = exposed_host_ipv6
                 updates.append(entry)
 
                 logger.info("AAAA update: {} -> {}".format(a_record, exposed_host_ipv6))
