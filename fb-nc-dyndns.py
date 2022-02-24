@@ -13,7 +13,9 @@ from configuration import Configuration
 from netcup import Netcup
 
 logger = logging.getLogger(__name__)
+
 config = Configuration()
+config.loglevel = logging.getLevelName(config.loglevel)
 
 
 def main(addresses: tuple):
