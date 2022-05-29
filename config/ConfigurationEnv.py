@@ -56,6 +56,6 @@ class ConfigurationEnvironment:
 
         domain = Domain()
         domain.name = self.domain
-        domain.a_records = self.host.split(',')
+        domain.arecords = self.host.split(',')
 
         return Configuration(options, fritzbox, netcup, [domain])

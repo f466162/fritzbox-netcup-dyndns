@@ -36,7 +36,7 @@ def main(addresses: tuple):
 
     if fritzbox.is_connected:
         if addresses[0] != fritzbox.external_ip or addresses[1] != exposed_host_ipv6:
-            netcup = Netcup(config.netcup.customer_number, config.netcup.api_key, config.netcup.api_password)
+            netcup = Netcup(config.netcup.customer_number, config.netcup.api_key, config.netcup.api_pw)
 
             ####
             netcup.login()
@@ -60,7 +60,7 @@ def process_domain(fritzbox, exposed_host_ipv6, netcup, domain:Domain):
     updates = list()
     dnsrecords = netcup.get_records(domain.name)
 
-    for a_record in domain.records:
+    for a_record in domain.arecords:
         queue_update_for_record(dnsrecords, fritzbox, exposed_host_ipv6, a_record, updates)
 
     netcup.update_records(domain.name, updates)
@@ -97,10 +97,10 @@ while True:
     last_addresses = main(last_addresses)
 
     # If an interval is set > 0, sleep and run again
-    if config.options.interval > 0:
+    if config.options._interval > 0:
         # Sleep up to config.interval + 10% to relax hard timing
-        skew = random.randint(0, max(1, math.floor(config.options.interval * 0.1)))
-        logger.debug("Next check for updating DNS records in {} (skew = {})".format(config.options.interval + skew, skew))
-        time.sleep(config.options.interval + skew)
+        skew = random.randint(0, max(1, math.floor(config.options._interval * 0.1)))
+        logger.debug("Next check for updating DNS records in {} (skew = {})".format(config.options._interval + skew, skew))
+        time.sleep(config.options._interval + skew)
     else:
         break
