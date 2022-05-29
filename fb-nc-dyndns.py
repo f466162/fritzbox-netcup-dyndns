@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import ipaddress
 import logging
 import math
@@ -43,6 +44,7 @@ def main(addresses: tuple):
             ####
 
             for domain in config.domains:
+                logger.info("Processing domain {}".format(domain.name))
                 process_domain(fritzbox, exposed_host_ipv6, netcup, domain)
 
             ####
@@ -56,7 +58,7 @@ def main(addresses: tuple):
     return fritzbox.external_ip, exposed_host_ipv6
 
 
-def process_domain(fritzbox, exposed_host_ipv6, netcup, domain:Domain):
+def process_domain(fritzbox, exposed_host_ipv6, netcup, domain: Domain):
     updates = list()
     dnsrecords = netcup.get_records(domain.name)
 
@@ -100,7 +102,8 @@ while True:
     if config.options._interval > 0:
         # Sleep up to config.interval + 10% to relax hard timing
         skew = random.randint(0, max(1, math.floor(config.options._interval * 0.1)))
-        logger.debug("Next check for updating DNS records in {} (skew = {})".format(config.options._interval + skew, skew))
+        logger.debug(
+            "Next check for updating DNS records in {} (skew = {})".format(config.options._interval + skew, skew))
         time.sleep(config.options._interval + skew)
     else:
         break
