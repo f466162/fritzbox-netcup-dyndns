@@ -46,7 +46,7 @@ class Netcup:
         self.api_session = 'invalid'
         self.http_session.close()
 
-    def getRecords(self, domain: str):
+    def get_records(self, domain: str):
         action = 'infoDnsRecords'
         param = {'customernumber': self.customer_number,
                  'apikey': self.api_key,
@@ -57,7 +57,7 @@ class Netcup:
 
         return response['responsedata']['dnsrecords']
 
-    def updateRecords(self, domain: str, records: list):
+    def update_records(self, domain: str, records: list):
         action = 'updateDnsRecords'
         param = {'customernumber': self.customer_number,
                  'apikey': self.api_key,
