@@ -1,6 +1,7 @@
 from environs import Env
 
-from config.Configuration import Configuration, Domain, Fritzbox, Netcup, Options
+from config.Configuration import Configuration
+from config.ConfigurationParts import Domain, Fritzbox, Netcup, Options
 
 
 class ConfigurationEnvironment:

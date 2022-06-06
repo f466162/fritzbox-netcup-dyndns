@@ -7,17 +7,33 @@ import random
 import signal
 import sys
 import time
-
+import yaml
+from argparse import ArgumentParser, Namespace
 from fritzconnection.lib.fritzstatus import FritzStatus
-
-from config.Configuration import Configuration, Domain
+from config.Configuration import Configuration
+from config.ConfigurationParts import Domain
 from config.ConfigurationEnv import ConfigurationEnvironment
 from netcup import Netcup
+from yaml.loader import SafeLoader
 
-logger = logging.getLogger(__name__)
+logger: logging.Logger = logging.getLogger(__name__)
 
-config: Configuration = ConfigurationEnvironment().to_config_object()
-config.options.loglevel = logging.getLevelName(config.options.loglevel)
+parser: ArgumentParser = ArgumentParser(description='FritzBox-Netcup-DynDNS', add_help=True)
+parser.add_argument('--config', metavar='CONFIG', type=str, nargs=1, help='Path to configuration file', required=False)
+parser.add_argument('--save', metavar='FILE', type=str, nargs=1, help='Save configuration to file')
+
+args: Namespace = parser.parse_args()
+config: Configuration = None
+
+if args.config != None:
+    with open(args.config[0], 'r') as configfile:
+        config = yaml.load(configfile, SafeLoader)
+else:
+    config = ConfigurationEnvironment().to_config_object()
+
+if args.save != None:
+    with open(args.save[0], 'w') as configfile:
+        yaml.dump(config, configfile)
 
 
 def main(addresses: tuple):
