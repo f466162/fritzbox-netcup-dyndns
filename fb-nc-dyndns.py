@@ -29,7 +29,7 @@ def main(addresses: tuple):
                            use_tls=config.tls,
                            timeout=config.timeout)
 
-    exposed_host_ipv6: str = ipaddress.IPv6Address(fritzbox.ipv6_prefix[:-1] + config.ipv6_node_id).exploded
+    exposed_host_ipv6: str = ipaddress.IPv6Address("%s%s" % (fritzbox.ipv6_prefix, config.ipv6_node_id)).exploded
 
     logger.debug("Fritzbox API: Connection established, address={}".format(config.address))
 
