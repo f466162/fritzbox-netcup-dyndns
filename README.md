@@ -13,6 +13,9 @@ The client retrieves the DNS records of the specified domain and looks for an A 
 A or AAAA record is missing or no IPv6 address could be retrieved from your FritzBox, the update for this record type is
 skipped. Multiple A/AAAA records can be specified and must be separated by commas.
 
+## Monitoring
+If `FB_NC_DYNDNS_SENTRY_URL` is set with a proper Sentry URL (e.g. https://XXXX.ingest.sentry.io/YYYY), erros are automagically logged to Sentry.
+
 ## Configuration
 
 All configuration can be done using either environment variables or a `.env` file in the working directory.
@@ -36,3 +39,4 @@ The following variables are optional (defaults as shown):
 * `FB_NC_DYNDNS_FB_TIMEOUT=10` - Timeout for FritzBox communicaiton
 * `FB_NC_DYNDNS_INTERVAL=300` - Interval to query for IPv4/IPv6 updates (in seconds)
 * `FB_NC_DYNDNS_LOGLEVEL="INFO"` - Default log level for the logger
+* `FB_NC_DYNDNS_SENTRY_URL` - A complete URL to send Sentry events to
