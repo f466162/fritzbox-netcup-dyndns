@@ -19,3 +19,4 @@ class Configuration:
         self.interval = env.int('FB_NC_DYNDNS_INTERVAL', 300)
         self.loglevel = env.str('FB_NC_DYNDNS_LOGLEVEL', 'INFO')
         self.ipv6_node_id = env.str('FB_NC_DYNDNS_IPV6_NODE_ID')
+        self.sentry_url = env.str('FB_NC_DYNDNS_SENTRY_URL')
