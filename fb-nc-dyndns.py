@@ -2,10 +2,12 @@
 import ipaddress
 import logging
 import math
+import platform
 import random
 import signal
 import sys
 import time
+import sentry_sdk
 
 from fritzconnection.lib.fritzstatus import FritzStatus
 
@@ -16,20 +18,38 @@ logger = logging.getLogger(__name__)
 
 config = Configuration()
 config.loglevel = logging.getLevelName(config.loglevel)
+logging.basicConfig(level=config.loglevel,
+                    format="%(asctime)s %(levelname)s %(processName)s/%(module)s[%(process)d]: %(message)s "
+                           "[%(pathname)s:%(lineno)d]")
+
+if config.sentry_url:
+    logger.info("Enabling Sentry")
+    sentry_sdk.init(config.sentry_url, traces_sample_rate=1.0)
+    sentry_sdk.set_tag("domain", config.domain)
+    sentry_sdk.set_tag("hostname", platform.node())
+else:
+    logger.info("Sentry not enabled")
 
 
 def main(addresses: tuple):
-    logging.basicConfig(level=config.loglevel,
-                        format="%(asctime)s %(levelname)s %(processName)s/%(module)s[%(process)d]: %(message)s "
-                               "[%(pathname)s:%(lineno)d]")
-
     fritzbox = FritzStatus(address=config.address,
                            user=config.user,
                            password=config.password,
                            use_tls=config.tls,
                            timeout=config.timeout)
 
-    exposed_host_ipv6: str = ipaddress.IPv6Address("%s%s" % (fritzbox.ipv6_prefix, config.ipv6_node_id)).exploded
+    ipv6_addr_segments: int = fritzbox.ipv6_prefix.count(':')
+    ipv6_network: str
+
+    if ipv6_addr_segments == 5:
+        ipv6_network = fritzbox.ipv6_prefix[:-1]
+    elif ipv6_addr_segments == 4:
+        ipv6_network = fritzbox.ipv6_prefix
+    else:
+        logger.error("Invalid count of segments: %s" % (ipv6_addr_segments))
+        sys.exit(1)
+
+    exposed_host_ipv6: str = ipaddress.IPv6Address("%s%s" % (ipv6_network, config.ipv6_node_id)).exploded
 
     logger.debug("Fritzbox API: Connection established, address={}".format(config.address))
 
