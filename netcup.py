@@ -14,8 +14,8 @@ class Netcup:
     http_session: requests.Session
     api_session: str
 
-    def __init__(self, customer_number: int, api_key: str, api_password: str):
-        self.logger = logging.getLogger(__name__)
+    def __init__(self, logger: logging.Logger, customer_number: int, api_key: str, api_password: str):
+        self.logger = logger
         self.customer_number = customer_number
         self.api_key = api_key
         self.api_password = api_password
