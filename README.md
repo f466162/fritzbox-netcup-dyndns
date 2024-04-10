@@ -24,7 +24,8 @@ The following variables are required:
 * `FB_NC_DYNDNS_NC_CUSTNO=12345` - Your Netcup customer number
 * `FB_NC_DYNDNS_NC_API_KEY="my-netcup-api-key"` - Your Netcup API key
 * `FB_NC_DYNDNS_NC_API_PW="my-netcup-api-password"` - Your Netcup API password
-* `FB_NC_DYNDNS_DNS_TARGETS="example.com:@,www;example.org:@,sub` - Zones to update with their records separated by a colon and multiple zones separated by a semicolon
+* `FB_NC_DYNDNS_DNS_TARGETS="example.com:@,www;example.org:@,sub` - Zones to update with their records separated by a
+  colon and multiple zones separated by a semicolon
 * `FB_NC_DYNDNS_IPV6_NODE_ID=":xx:yy"` - The node id of your IPv6 device to be exposed
 
 The following variables are optional (defaults as shown):

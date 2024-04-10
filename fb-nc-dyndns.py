@@ -19,10 +19,12 @@ logger = initialize_logger(config)
 # Initialize Sentry
 initialize_sentry(config, logger)
 
+
 # Trap shutdown signals
 def shutdown(signum, stack):
     logger.info("Shutting down, signal={}".format(signum))
     sys.exit()
+
 
 signal.signal(signal.SIGTERM, shutdown)
 signal.signal(signal.SIGINT, shutdown)
