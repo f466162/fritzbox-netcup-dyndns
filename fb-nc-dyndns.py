@@ -7,7 +7,7 @@ import time
 
 from configuration import Configuration
 from job import Job
-from sentry import initialize_sentry
+from sentry import Sentry
 from utils import initialize_logger
 
 # Load config
@@ -17,7 +17,8 @@ config = Configuration()
 logger = initialize_logger(config)
 
 # Initialize Sentry
-initialize_sentry(config, logger)
+sentry = Sentry(config, logger)
+sentry.initialize_sentry()
 
 
 # Trap shutdown signals
@@ -30,7 +31,7 @@ signal.signal(signal.SIGTERM, shutdown)
 signal.signal(signal.SIGINT, shutdown)
 
 # Initialize job
-job = Job(config, logger)
+job = Job(config, logger, sentry)
 
 # Control loop
 while True:
